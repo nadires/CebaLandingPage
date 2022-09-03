@@ -457,36 +457,97 @@
               </div>
             </div>
 
-            <div class="form">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            
+              <!--<form action="https://formsubmit.co/3c9d55c1ce8acd11d371bb41f3910d20" method="POST" >
                 <div class="row">
                   <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required>
+                    <input type="text" name="name" class="form-control"  placeholder="Tu Nombre" required>
                   </div>
                   <div class="form-group col-lg-6 mt-3 mt-lg-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Tu email" required>
+                    <input type="email" class="form-control" name="email"  placeholder="Tu email" required>
                   </div>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto/Tema" required>
+                  <input type="text" class="form-control" name="subject"  placeholder="Asunto/Tema" required>
                 </div>
                 <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
+                  <textarea class="form-control" name="comments" rows="5" placeholder="Mensaje" required></textarea>
                 </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Tu mensaje ha sido enviado con exito, te estaremos contactando pronto, Muchas Gracias!</div>
+               
+                <div class=" text-center">
+                  <input type="submit"  class="col-2 btn btn-primary"  title="Send Message"  style="margin-top: 10px;" onclick=gracias()>
                 </div>
-                <div class="text-center"><button type="submit" title="Send Message">Enviar Mensaje</button></div>
+                
+                <input type="hidden" name="_next" value="http://127.0.0.1:5500/index.html">
+                <input type="hidden" name="_captcha" value="false">
+              
+              </form> -->
+
+
+
+              <form id = "form" action="https://formspree.io/f/xqkjekno" method="POST" >
+                <div class="row">
+                  <div class="form-group col-lg-6">
+                    <input type="text" name="name" class="form-control"  placeholder="Tu Nombre" required>
+                  </div>
+                  <div class="form-group col-lg-6 mt-3 mt-lg-0">
+                    <input type="email" class="form-control" name="email"  placeholder="Tu email" required>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="subject"  placeholder="Asunto/Tema" required>
+                </div>
+                <div class="form-group mt-3">
+                  <textarea class="form-control" name="comments" rows="5" placeholder="Mensaje" required></textarea>
+                </div>
+               
+                <div class=" text-center">
+                  <input type="submit"  class="col-2 btn btn-primary"  title="Send Message"  style="margin-top: 10px;">
+                </div>
+                
+          
               </form>
-            </div>
+           
           </div>
 
         </div>
 
       </div>
+    
     </section><!-- End Contact Section -->
+     
+    <script>
+      const $form = document.querySelector('#form')
+
+      $form.addEventListener('submit', handlesubmit)
+
+      async function handlesubmit(event){
+        event.preventDefault()
+        const form = new FormData(this)
+       const response = await fetch(this.action,{
+          method: this.method,
+          body: form,
+          headers:{
+            'Accept': 'application/json'
+          }
+
+        })
+
+        if (response.ok){
+          this.reset()
+          alert("Tu mensaje ha sido enviado con exito, te estaremos contactando pronto,¡Muchas Gracias!")
+
+        }
+      }
+    
+    </script>
+      
+     
+     <script>
+      function gracias(){
+        alert("Tu mensaje ha sido enviado con exito, te estaremos contactando pronto, Muchas Gracias!");
+      }
+     </script>
 
   </main><!-- End #main -->
 
@@ -568,6 +629,7 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
+  
   <script src="assets/js/main.js"></script>
 
 </body>
